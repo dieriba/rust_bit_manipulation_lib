@@ -3,7 +3,8 @@ authors = ["Dieriba <dieriba.pro@gmail.com>"]
 name = "bit_manipulation"
 version = "0.1.0"
 edition = "2021"
-description = "OptSwitch: A lightweight Rust crate for seamless management and validation of up to 128 option states using a u128 variable. Empower your applications with efficient, flexible, and intuitive option handling, ensuring smooth activation checks and manipulation."
+description = "\"bit_manipulation-rs\"\n\nA Rust library for efficient manipulation of 128-bit integers at the bit level.\n\n\t\"Features:\"\n\n\t- \t\"Flexible Bit Manipulation:\"\t Perform various operations on 128-bit integers including setting, clearing, and checking individual bits.\n  \n\t- \t\"Efficient Implementation:\"\t Utilizes bitwise operations for high-performance bit manipulation.\n  \n\t- \t\"Intuitive API:\"\t Provides a straightforward API for working with 128-bit integers, making it easy to integrate into your Rust projects.\n\n\t\"Usage:\"\n\n\t```rust\n\tuse bit_manipulation::Bit128;\n\n\tfn main() {\n\t    // Create a new Bit128 instance\n\t    let mut bit128 = Bit128::new();\n\n\t    // Set a bit\n\t    bit128.set_bit(5);\n\n\t    // Check if a bit is on\n\t    assert_eq!(bit128.is_bit_on(5), true);\n\n\t    // Clear a bit\n\t    bit128.clear_bit(5);\n\n\t    // Check if a bit is off\n\t    assert_eq!(bit128.is_bit_on(5), false);\n\t}\n\t```\n\n\t\"Installation:\"\n\n\tAdd this to your `Cargo.toml`:\n\n\t```toml\n\t[dependencies]\n\tbit_manipulation = \"0.1.0\"\n\t```\n\n\t\"License:\"\n\n\tThis library is licensed under the terms of the MIT license.\n\n\t\"Contributing:\"\n\n\tContributions are welcome! Feel free to submit issues or pull requests on [GitHub](https://github.com/your-username/bit_manipulation-rs).\n\n\t\"Documentation:\"\n\n\tFull API documentation can be found [here](https://docs.rs/bit_manipulation).\n"
+
 license = "MIT"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 

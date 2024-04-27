@@ -3,20 +3,20 @@ pub mod bit_manipulation {
     pub const SIZE: u8 = 128;
 
     #[derive(Default)]
-    pub struct Options {
+    pub struct Bit128 {
         value: u128,
-        activated_options: Vec<bool>,
+        activated_bit128: Vec<bool>,
     }
 
-    impl Options {
+    impl Bit128 {
         pub fn new() -> Self {
-            Options {
+            Bit128 {
                 value: 0,
-                activated_options: vec![false; SIZE as usize],
+                activated_bit128: vec![false; SIZE as usize],
             }
         }
 
-        pub fn check_bit(&self, bit: u8) -> bool {
+        pub fn is_bit_on(&self, bit: u8) -> bool {
             if bit >= SIZE {
                 return false;
             }
@@ -24,14 +24,14 @@ pub mod bit_manipulation {
             self.value & (1 << bit) > 0
         }
 
-        pub fn check_bits(&self, bits: Vec<u8>) -> Vec<bool> {
-            let mut options = vec![false; SIZE as usize];
+        pub fn are_bits_on(&self, bits: Vec<u8>) -> Vec<bool> {
+            let mut bit128 = vec![false; SIZE as usize];
             for &bit in &bits {
-                if self.check_bit(bit) {
-                    options[bit as usize] = true;
+                if self.is_bit_on(bit) {
+                    bit128[bit as usize] = true;
                 }
             }
-            options
+            bit128
         }
 
         pub fn set_bit(&mut self, bit: u8) {
@@ -39,14 +39,14 @@ pub mod bit_manipulation {
                 return ;
             }
             self.value |= 1 << bit;
-            self.activated_options[bit as usize] = true;
+            self.activated_bit128[bit as usize] = true;
         }
 
         pub fn set_bits(&mut self, bits: Vec<u8>) {
             for &bit in &bits {
                 if bit < SIZE {
                     self.value |= 1 << bit;
-                    self.activated_options[bit as usize] = true;
+                    self.activated_bit128[bit as usize] = true;
                 }
             }
         }
@@ -56,19 +56,19 @@ pub mod bit_manipulation {
                 return ;
             }
             self.value &= !(1 << bit);
-            self.activated_options[bit as usize] = false;
+            self.activated_bit128[bit as usize] = false;
         }
 
         pub fn clear_bits(&mut self, bits: Vec<u8>) {
             for &bit in &bits {
                 if bit >= SIZE {
                     self.value &= !(1 << bit);
-                    self.activated_options[bit as usize] = false;
+                    self.activated_bit128[bit as usize] = false;
                 }
             }
         }
 
-        pub fn clear_all_options(&mut self) {
+        pub fn clear_all_bit128(&mut self) {
             self.value = 0;
         }
 
@@ -76,8 +76,8 @@ pub mod bit_manipulation {
             self.value
         }
 
-        pub fn get_all_options(&self) -> &Vec<bool> {
-            &self.activated_options
+        pub fn get_all_bit128(&self) -> &Vec<bool> {
+            &self.activated_bit128
         }
         
         pub fn set_all_flags(&mut self) {
@@ -92,42 +92,42 @@ mod tests {
 
     #[test]
     fn set_bit() {
-        let mut options = bit_manipulation::Options::new();
+        let mut bit128 = bit_manipulation::Bit128::new();
         
         let mut bit = 0;
-        options.set_bit(bit);
-        assert!(options.check_bit(bit));
+        bit128.set_bit(bit);
+        assert!(bit128.is_bit_on(bit));
 
         bit = 4;
-        options.set_bit(bit);
-        assert!(options.check_bit(bit));
+        bit128.set_bit(bit);
+        assert!(bit128.is_bit_on(bit));
 
         bit = 7;
-        options.set_bit(bit);
-        assert!(options.check_bit(bit));
+        bit128.set_bit(bit);
+        assert!(bit128.is_bit_on(bit));
 
         bit = 127;
-        options.set_bit(bit);
-        assert!(options.check_bit(bit));
+        bit128.set_bit(bit);
+        assert!(bit128.is_bit_on(bit));
     }
     #[test]
     fn clear_bit() {
-        let mut options = bit_manipulation::Options::new();
-        options.set_all_flags();
+        let mut bit128 = bit_manipulation::Bit128::new();
+        bit128.set_all_flags();
         let mut bit = 0;
-        options.clear_bit(bit);
-        assert!(!options.check_bit(bit));
+        bit128.clear_bit(bit);
+        assert!(!bit128.is_bit_on(bit));
 
         bit = 4;
-        options.clear_bit(bit);
-        assert!(!options.check_bit(bit));
+        bit128.clear_bit(bit);
+        assert!(!bit128.is_bit_on(bit));
 
         bit = 7;
-        options.clear_bit(bit);
-        assert!(!options.check_bit(bit));
+        bit128.clear_bit(bit);
+        assert!(!bit128.is_bit_on(bit));
 
         bit = 127;
-        options.clear_bit(bit);
-        assert!(!options.check_bit(bit));
+        bit128.clear_bit(bit);
+        assert!(!bit128.is_bit_on(bit));
     }
 }
