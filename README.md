@@ -1,51 +1,81 @@
 # bit_manipulation-rs
 
-A Rust library for efficient manipulation of 128-bit integers at the bit level.
+A Rust library for manipulating unsigned integers from u8 to u128, allowing you to set, clear, or retrieve individual bits.
 
 ## Features
 
-- **Flexible Bit Manipulation:** Perform various operations on 128-bit integers including setting, clearing, and checking individual bits.
-  
+- **Bit Manipulation**: Set, clear, and retrieve individual bits within unsigned integers.
+
+- **Cross-Type Support**: Works with `u8`, `u16`, `u32`, `u64`, and `u128` types.
+
+- **Efficient Storage**: Handles bit manipulation efficiently by storing bits as boolean flags.
+
 - **Efficient Implementation:** Utilizes bitwise operations for high-performance bit manipulation.
   
-- **Intuitive API:** Provides a straightforward API for working with 128-bit integers, making it easy to integrate into your Rust projects.
+- **Intuitive API:** Provides a straightforward API for working with u8..u128, making it easy to integrate into your Rust projects.
 
 ## Functions
-### new() -> Bit128
-Creates a new Bit128 instance with all bits initially set to 0.
+### new() -> Bits
+Creates a new Bits instance with all bits initially set to 0.
 ### is_bit_on(bit: u8) -> bool
 
-Checks if the specified bit is on (1) or off (0). Returns true if the bit is set, false otherwise.
+Checks if the specified bit is on (1) or off (0).  
+#### Returns
+- true if the bit is set, false otherwise.
 
 ### are_bits_on(bits: Vec<u8>) -> Vec<bool>
 
-Checks if multiple specified bits are on (1) or off (0). Returns a vector of booleans indicating whether each bit is set or not.
+Checks if multiple specified bits are on (1) or off (0).  
+> **Note:**  
+> Return a vector of booleans indicating whether each bit is set (`true`) or unset (`false`).  
+The vector will contain the state of all bits within the integer value, not just the ones specified in the `bits` parameter.
 
-###  set_bit(bit: u8)
-Sets the specified bit to 1. Requires bit to be less than 128.
+###  set_bit(bit: u8) -> bool
+Sets the specified bit within the unsigned integer value represented by the Bits struct.  
+The bit parameter indicates the position of the bit to set, starting from 0 for the least significant bit.
 
+> **Note:**  
+> The maximum value that the bit parameter can have depends on the base type T.  
+For example, if T is u8, the maximum valid value for bit would be 7 (since u8 has 8 bits, indexed from 0 to 7).   
+Attempting to set a bit with a value higher than the maximum valid index will result in the function returning false without modifying the state of the Bits struct.  
 
-### set_bits(bits: Vec<u8>)
+#### Returns
+- true if the operation succeeded, false otherwise.
 
-Sets multiple specified bits to 1. Requires all bits to be less than 128.
+### set_bits(bits: Vec<u8>) -> &Vec<bool>
 
-###  clear_bit(bit: u8)
+Sets the multiple specified bits within the unsigned integer value represented by the Bits struct.  
 
-Clears the specified bit, setting it to 0. Requires bit to be less than 128.
+> **Note:**  
+> The maximum value that the each bit can have depends on the base type T.  
+For example, if T is u8, the maximum valid value for bit would be 7 (since u8 has 8 bits, indexed from 0 to 7).   
+Attempting to set a bit with a value higher than the maximum valid index will result in the function to ignore and continue to set valid bits.
+
+> **Note:**  
+> Return a vector of boolean indicating whether each bit is set (`true`) or unset (`false`).  
+The vector will contain the state of all bits within the integer value, not just the ones specified in the `bits` parameter.
+
+###  clear_bit(bit: u8) -> bool
+
+Clears the specified bit, setting it to 0.  
+#### Returns
+- true if the operation succeeded, false otherwise.
 
 ### clear_bits(bits: Vec<u8>)
 
 Clears multiple specified bits, setting them to 0. Requires all bits to be less than 128.
-### clear_all_bit128()
+### clear_all_bits()
 
 Clears all bits, setting them to 0.
 
 ### get_value() -> u128
 
-Returns the current value of the 128-bit integer.
-### get_all_bit128() -> &Vec<bool>
+#### Returns
+- the current value of the 128-bit integer.
+### get_all_bits() -> &Vec<bool>
 
-Returns a reference to the vector representing the state of all bits.
+#### Returns
+- A reference to the vector representing the state of all bits.
 ### set_all_flags()
 
 Sets all bits to 1, effectively setting the value to the maximum possible value of a u128.
@@ -53,24 +83,70 @@ Sets all bits to 1, effectively setting the value to the maximum possible value 
 ## Usage
 
 ```rust
-use bit_manipulation::Bit128;
+use bit_manipulation::Bits;
 
 fn main() {
-    // Create a new Bit128 instance
-    let mut bit128 = Bit128::new();
+    // Create a new bit set for u8 integers
+    let mut bits: Bits<u8> = bit_manipulation::Bits::new();
 
-    // Set a bit
-    bit128.set_bit(5);
+    // Try to set a bit that exceeds the size of the integer
+    let set_success = bits.set_bit(10);
 
-    // Check if a bit is on
-    assert_eq!(bit128.is_bit_on(5), true);
+    // Check if the bit is on (should be false)
+    assert!(!bits.is_bit_on(10));
+    
+    // Check if the operation was successful
+    assert!(!set_success);
 
-    // Clear a bit
-    bit128.clear_bit(5);
+    // Try to clear a bit that exceeds the size of the integer
+    let clear_success = bits.clear_bit(10);
 
-    // Check if a bit is off
-    assert_eq!(bit128.is_bit_on(5), false);
+    // Check if the bit is off (should be false)
+    assert!(!bits.is_bit_on(10));
+    
+    // Check if the operation was successful
+    assert!(!clear_success);
+}
+
+```
+```rust
+use bit_manipulation::bit_manipulation::Bits;
+
+fn main() {
+    // Create a new bit set for u8 integers
+    let mut bits: Bits<u8> = bit_manipulation::Bits::new();
+
+    // Try to set a bit that exceeds the size of the integer
+    let operation_success = bits.set_bit(10);
+
+    // Check if the bit is on (should be false)
+    assert!(!bits.is_bit_on(10));
+    
+    // Check if the operation was successful
+    assert!(!operation_success);
 }
 ```
+```rust
+use bit_manipulation::bit_manipulation::Bits;
+
+fn main() {
+    // Create a new bit set for u64 integers
+    let mut bits: Bits<u8> = bit_manipulation::Bits::new();
+    let arr = vec![1, 3, 5, 2, 65];
+    // Set multiple bits
+    bits.set_bits(arr);
+
+    // Check if specific bits are on
+    let activated_bits = bits.are_bits_on(arr);
+    assert_eq!(activated_bits, vec![false, true, true, true, false, true, false, false]);
+
+    // Clear all bits
+    bits.clear_all_bits();
+
+    // Check if all bits are cleared
+    assert_eq!(bits.get_value(), 0);
+}
+```
+
 ## Support
 You can contact me at dieriba.pro@gmail.com, for any additional requests or features you wand to add !

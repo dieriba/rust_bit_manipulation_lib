@@ -3,7 +3,7 @@ authors = ["Dieriba <dieriba.pro@gmail.com>"]
 name = "bit_manipulation"
 version = "0.1.2"
 edition = "2021"
-description = "bit_manipulation: A lightweight Rust crate for seamless management and validation of up to 128 option states using a u128 variable. Empower your applications with efficient, flexible, and intuitive option handling, ensuring smooth activation checks and manipulation."
+description = "bit_manipulation: A lightweight Rust crate for seamless management and validation of up to 128 option states. Empower your applications with efficient, flexible, and intuitive option handling, ensuring smooth activation checks and manipulation."
 license = "MIT"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
