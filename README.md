@@ -121,7 +121,7 @@ fn main() {
 
     // Check if the bit is on (should be false)
     assert!(!bits.is_bit_on(10));
-    
+
     // Check if the operation was successful
     assert!(!operation_success);
 }
@@ -133,6 +133,7 @@ fn main() {
     // Create a new bit set for u8 integers
     let mut bits: Bits<u8> = bit_manipulation::Bits::new();
     let arr = vec![1, 3, 5, 2, 65];
+
     // Set multiple bits
     bits.set_bits(arr);
 
