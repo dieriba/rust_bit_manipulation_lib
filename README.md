@@ -130,7 +130,7 @@ fn main() {
 use bit_manipulation::bit_manipulation::Bits;
 
 fn main() {
-    // Create a new bit set for u64 integers
+    // Create a new bit set for u8 integers
     let mut bits: Bits<u8> = bit_manipulation::Bits::new();
     let arr = vec![1, 3, 5, 2, 65];
     // Set multiple bits
