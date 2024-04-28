@@ -221,22 +221,17 @@ mod tests {
 
     #[test]
     fn set_bits() {
-        // Create a new bit set for u64 integers
         let mut bits: Bits<u8> = bit_manipulation::Bits::new();
         let arr = vec![1, 3, 5, 2, 65];
-        // Set multiple bits
         let res = bits.set_bits(&arr);
 
-        // Check if specific bits are on
         assert_eq!(
             res,
             &vec![false, true, true, true, false, true, false, false]
         );
 
-        // Clear all bits
         bits.clear_all_bits();
 
-        // Check if all bits are cleared
         assert_eq!(bits.get_value(), 0);
     }
 
@@ -261,10 +256,8 @@ mod tests {
 
     #[test]
     fn clear_bits() {
-        // Create a new bit set for u8 integers
         let mut bits: Bits<u8> = bit_manipulation::Bits::new();
         let arr = vec![1, 3, 5, 2, 65];
-        // Set multiple bits
         let mut activated_bits = bits.set_bits(&arr);
 
         assert_eq!(
@@ -279,7 +272,6 @@ mod tests {
             &vec![false, false, false, false, false, false, false, false]
         );
 
-        // Check if all bits are cleared
         assert_eq!(bits.get_value(), 0);
     }
 
