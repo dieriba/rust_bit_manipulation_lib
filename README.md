@@ -63,22 +63,26 @@ Clears the specified bit, setting it to 0.
 
 ### clear_bits(bits: Vec<u8>)
 
-Clears multiple specified bits, setting them to 0. Requires all bits to be less than 128.
+Clears the specified bits in a value of type `T`, where `T` is expected to be one of:
+`u8`, `u16`, `u32`, `u64`, or `u128`. Only the bits that are within the range of the maximum
+value of type `T` will be cleared. For example, if the base type is `u8` and the method
+is called with the vector `[1, 5, 10]`, only the bits at positions 1 and 5 will be cleared,
+since `u8` does not have a 10th bit.
 ### clear_all_bits()
 
 Clears all bits, setting them to 0.
 
-### get_value() -> u128
+### get_value() -> T
 
 #### Returns
-- the current value of the 128-bit integer.
+- the current value of the T unsigned integer.
 ### get_all_bits() -> &Vec<bool>
 
 #### Returns
 - A reference to the vector representing the state of all bits.
 ### set_all_flags()
 
-Sets all bits to 1, effectively setting the value to the maximum possible value of a u128.
+Sets all bits to 1, effectively setting the value to the maximum possible value of given type T.
 
 ## Usage
 
