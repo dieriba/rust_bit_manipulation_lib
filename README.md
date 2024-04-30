@@ -144,7 +144,7 @@ fn main() {
 
     // Check if specific bits are on
     let activated_bits = bits.are_bits_on(&arr);
-    assert_eq!(activated_bits, vec![false, true, true, true, false, true, false, false]);
+    assert_eq!(activated_bits, &vec![false, true, true, true, false, true, false, false]);
 
     // Clear all bits
     bits.clear_all_bits();
