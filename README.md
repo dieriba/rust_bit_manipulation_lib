@@ -61,13 +61,15 @@ Clears the specified bit, setting it to 0.
 #### Returns
 - true if the operation succeeded, false otherwise.
 
-### clear_bits(bits: &Vec<u8>)
+### clear_bits(bits: &Vec<u8>) -> &Vec<bool>
 
 Clears the specified bits in a value of type `T`, where `T` is expected to be one of:
 `u8`, `u16`, `u32`, `u64`, or `u128`. Only the bits that are within the range of the maximum
 value of type `T` will be cleared. For example, if the base type is `u8` and the method
 is called with the vector a reference to the vector `[1, 5, 10]`, only the bits at positions 1 and 5 will be cleared,
 since `u8` does not have a 10th bit.
+#### Returns
+- A reference to a vector containing boolean values      indicating whether each corresponding bit in the stored value has been successfully cleared (`false`) or not (`true`).
 ### clear_all_bits()
 
 Clears all bits, setting them to 0.
