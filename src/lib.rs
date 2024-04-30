@@ -193,14 +193,13 @@ pub mod bit_manipulation {
         /// This example demonstrates how to use the `are_bits_on` method to check if specific bits are set within the stored value.
 
 
-        pub fn are_bits_on(&self, bits: &Vec<u8>) -> Vec<bool> {
-            let mut activated_flags = vec![false; self.size as usize];
+        pub fn are_bits_on(&mut self, bits: &Vec<u8>) -> &Vec<bool> {
             for &bit in bits {
                 if self.is_bit_on(bit) {
-                    activated_flags[bit as usize] = true;
+                    self.activated_bits[bit as usize] = true;
                 }
             }
-            activated_flags
+            &self.activated_bits
         }
 
         /// Sets a specific bit in the value stored within the struct instance.

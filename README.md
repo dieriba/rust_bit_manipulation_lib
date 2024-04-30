@@ -23,12 +23,11 @@ Checks if the specified bit is on (1) or off (0).
 #### Returns
 - true if the bit is set, false otherwise.
 
-### are_bits_on(bits: &Vec<u8>) -> Vec<bool>
+### are_bits_on(bits: &Vec<u8>) -> &Vec<bool>
 
 Checks if multiple specified bits are on (1) or off (0).  
-> **Note:**  
-> Return a vector of booleans indicating whether each bit is set (`true`) or unset (`false`).  
-The vector will contain the state of all bits within the integer value, not just the ones specified in the `bits` parameter.
+#### Returns 
+- A reference to a vector containing boolean values indicating whether each corresponding bit in the stored value has been successfully cleared (`false`) or not (`true`).
 
 ###  set_bit(bit: u8) -> bool
 Sets the specified bit within the unsigned integer value represented by the Bits struct.  
@@ -51,9 +50,9 @@ Sets the multiple specified bits within the unsigned integer value represented b
 For example, if T is u8, the maximum valid value for bit would be 7 (since u8 has 8 bits, indexed from 0 to 7).   
 Attempting to set a bit with a value higher than the maximum valid index will result in the function to ignore and continue to set valid bits.
 
-> **Note:**  
-> Return a vector of boolean indicating whether each bit is set (`true`) or unset (`false`).  
-The vector will contain the state of all bits within the integer value, not just the ones specified in the `bits` parameter.
+#### Returns
+
+- A reference to a vector containing boolean values indicating whether each corresponding bit in the stored value has been successfully cleared (`false`) or not (`true`).
 
 ###  clear_bit(bit: u8) -> bool
 
@@ -69,7 +68,7 @@ value of type `T` will be cleared. For example, if the base type is `u8` and the
 is called with the vector a reference to the vector `[1, 5, 10]`, only the bits at positions 1 and 5 will be cleared,
 since `u8` does not have a 10th bit.
 #### Returns
-- A reference to a vector containing boolean values      indicating whether each corresponding bit in the stored value has been successfully cleared (`false`) or not (`true`).
+- A reference to a vector containing boolean values indicating whether each corresponding bit in the stored value has been successfully cleared (`false`) or not (`true`).
 ### clear_all_bits()
 
 Clears all bits, setting them to 0.
