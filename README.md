@@ -91,7 +91,7 @@ use bit_manipulation::Bits;
 
 fn main() {
     // Create a new bit set for u8 integers
-    let mut bits: Bits<u8> = bit_manipulation::Bits::new();
+    let mut bits: Bits<u8> = Bits::new();
 
     // Try to set a bit that exceeds the size of the integer
     let set_success = bits.set_bit(10);
@@ -118,7 +118,7 @@ use bit_manipulation::bit_manipulation::Bits;
 
 fn main() {
     // Create a new bit set for u8 integers
-    let mut bits: Bits<u8> = bit_manipulation::Bits::new();
+    let mut bits: Bits<u8> = Bits::new();
 
     // Try to set a bit that exceeds the size of the integer
     let operation_success = bits.set_bit(10);
@@ -135,7 +135,7 @@ use bit_manipulation::bit_manipulation::Bits;
 
 fn main() {
     // Create a new bit set for u8 integers
-    let mut bits: Bits<u8> = bit_manipulation::Bits::new();
+    let mut bits: Bits<u8> = Bits::new();
     let arr = vec![1, 3, 5, 2, 65];
 
     // Set multiple bits
