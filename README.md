@@ -23,7 +23,7 @@ Checks if the specified bit is on (1) or off (0).
 #### Returns
 - true if the bit is set, false otherwise.
 
-### are_bits_on(bits: Vec<u8>) -> Vec<bool>
+### are_bits_on(bits: &Vec<u8>) -> Vec<bool>
 
 Checks if multiple specified bits are on (1) or off (0).  
 > **Note:**  
@@ -42,7 +42,7 @@ Attempting to set a bit with a value higher than the maximum valid index will re
 #### Returns
 - true if the operation succeeded, false otherwise.
 
-### set_bits(bits: Vec<u8>) -> &Vec<bool>
+### set_bits(bits: &Vec<u8>) -> &Vec<bool>
 
 Sets the multiple specified bits within the unsigned integer value represented by the Bits struct.  
 
@@ -61,12 +61,12 @@ Clears the specified bit, setting it to 0.
 #### Returns
 - true if the operation succeeded, false otherwise.
 
-### clear_bits(bits: Vec<u8>)
+### clear_bits(bits: &Vec<u8>)
 
 Clears the specified bits in a value of type `T`, where `T` is expected to be one of:
 `u8`, `u16`, `u32`, `u64`, or `u128`. Only the bits that are within the range of the maximum
 value of type `T` will be cleared. For example, if the base type is `u8` and the method
-is called with the vector `[1, 5, 10]`, only the bits at positions 1 and 5 will be cleared,
+is called with the vector a reference to the vector `[1, 5, 10]`, only the bits at positions 1 and 5 will be cleared,
 since `u8` does not have a 10th bit.
 ### clear_all_bits()
 
@@ -139,10 +139,10 @@ fn main() {
     let arr = vec![1, 3, 5, 2, 65];
 
     // Set multiple bits
-    bits.set_bits(arr);
+    bits.set_bits(&arr);
 
     // Check if specific bits are on
-    let activated_bits = bits.are_bits_on(arr);
+    let activated_bits = bits.are_bits_on(&arr);
     assert_eq!(activated_bits, vec![false, true, true, true, false, true, false, false]);
 
     // Clear all bits
