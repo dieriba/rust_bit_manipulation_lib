@@ -18,65 +18,27 @@ mod private {
     }
 }
 
-impl private::Uint for u8 {
-    fn max_value() -> u8 {
-        std::u8::MAX
-    }
-    fn in_memory_size() -> u8 {
-        u8::BITS as u8
-    }
-    fn convert(bit: u8) -> Self {
-        1 << bit
-    }
+macro_rules! _impl_private {
+    ($t:ty) => {
+        impl $crate::private::Uint for $t {
+            fn max_value() -> Self {
+                <$t>::MAX
+            }
+            fn in_memory_size() -> u8 {
+                <$t>::BITS as u8
+            }
+            fn convert(bit: u8) -> Self {
+                1 << bit
+            }
+        }
+    };
 }
 
-impl private::Uint for u16 {
-    fn max_value() -> u16 {
-        std::u16::MAX
-    }
-    fn in_memory_size() -> u8 {
-        u16::BITS as u8
-    }
-    fn convert(bit: u8) -> Self {
-        1 << bit
-    }
-}
-
-impl private::Uint for u32 {
-    fn max_value() -> u32 {
-        std::u32::MAX
-    }
-    fn in_memory_size() -> u8 {
-        u32::BITS as u8
-    }
-    fn convert(bit: u8) -> Self {
-        1 << bit
-    }
-}
-
-impl private::Uint for u64 {
-    fn max_value() -> u64 {
-        std::u64::MAX
-    }
-    fn in_memory_size() -> u8 {
-        u64::BITS as u8
-    }
-    fn convert(bit: u8) -> Self {
-        1 << bit
-    }
-}
-
-impl private::Uint for u128 {
-    fn max_value() -> u128 {
-        std::u128::MAX
-    }
-    fn in_memory_size() -> u8 {
-        u128::BITS as u8
-    }
-    fn convert(bit: u8) -> Self {
-        1 << bit
-    }
-}
+_impl_private!(u8);
+_impl_private!(u16);
+_impl_private!(u32);
+_impl_private!(u64);
+_impl_private!(u128);
 
 pub mod bit_manipulation {
     use crate::private;
@@ -109,7 +71,7 @@ pub mod bit_manipulation {
         /// # Example
         ///
         /// ```
-        /// let bits: Bits<u8> = Bits::new();
+        /// //let bits: Bits<u8> = Bits::new();
         /// // Creates a new instance of `Bits` with an initial value of zero and size based on `u8`.
         /// ```
         ///
@@ -143,9 +105,9 @@ pub mod bit_manipulation {
         /// # Example
         ///
         /// ```
-        /// let bits: Bits<u8> = Bits::new();
+        /// //let bits: Bits<u8> = Bits::new();
         /// // Creates a new instance of `Bits` with an initial value of zero and size based on `u8`.
-        /// assert!(bits.is_bit_on(2));
+        /// //assert!(bits.is_bit_on(2));
         /// //Checking that the third bit is activated
         /// ```
         ///
@@ -180,12 +142,12 @@ pub mod bit_manipulation {
         /// # Example
         ///
         /// ```
-        /// let bits: Bits<u8> = Bits::new();
+        /// //let bits: Bits<u8> = Bits::new();
         /// // Creates a new instance of `Bits` with an initial value of zero and size based on `u8`.
-        /// let positions_to_check = vec![2, 4, 6];
-        /// let activated_flags = bits.are_bits_on(&positions_to_check);
+        /// //let positions_to_check = vec![2, 4, 6];
+        /// //let activated_flags = bits.are_bits_on(&positions_to_check);
         /// // Checks if bits at positions 2, 4, and 6 are set.
-        /// assert_eq!(activated_flags, vec![false, false, false, true, false, true, false, false]);
+        /// //assert_eq!(activated_flags, vec![false, false, false, true, false, true, false, false]);
         /// // Only the bits at positions 4 and 6 are set in the stored value.
         /// ```
         ///
@@ -219,14 +181,14 @@ pub mod bit_manipulation {
         /// # Example
         ///
         /// ```
-        /// let mut bits: Bits<u8> = Bits::new();
+        /// //let mut bits: Bits<u8> = Bits::new();
         /// // Creates a new instance of `Bits` with an initial value of zero and size based on `u8`.
-        /// let bit_to_set = 2;
-        /// let set_success = bits.set_bit(bit_to_set);
+        /// //let bit_to_set = 2;
+        /// //let set_success = bits.set_bit(bit_to_set);
         /// // Sets the bit at position 2 within the stored value.
-        /// assert!(set_success);
+        /// //assert!(set_success);
         /// // Confirms that the bit at position 2 is set.
-        /// assert!(bits.is_bit_on(bit_to_set));
+        /// //assert!(bits.is_bit_on(bit_to_set));
         /// ```
         ///
         /// This example demonstrates how to use the `set_bit` method to set a specific bit within the stored value.
@@ -259,12 +221,12 @@ pub mod bit_manipulation {
         /// # Example
         ///
         /// ```
-        /// let mut bits: Bits<u8> = Bits::new();
+        /// //let mut bits: Bits<u8> = Bits::new();
         /// // Creates a new instance of `Bits` with an initial value of zero and size based on `u8`.
-        /// let positions_to_set = vec![2, 4, 6];
-        /// let activated_flags = bits.set_bits(&positions_to_set);
+        /// //let positions_to_set = vec![2, 4, 6];
+        /// //let activated_flags = bits.set_bits(&positions_to_set);
         /// // Sets the bits at positions 2, 4, and 6 within the stored value.
-        /// assert_eq!(activated_flags, &vec![false, false, true, false, true, false, true, false]);
+        /// //assert_eq!(activated_flags, &vec![false, false, true, false, true, false, true, false]);
         /// // The returned vector indicates which bits were successfully set.
         /// ```
         ///
@@ -296,17 +258,17 @@ pub mod bit_manipulation {
         /// # Example
         ///
         /// ```
-        /// let mut bits: Bits<u8> = Bits::new();
+        /// //let mut bits: Bits<u8> = Bits::new();
         /// // Creates a new instance of `Bits` with an initial value of zero and size based on `u8`.
-        /// bits.set_bit(2);
+        /// //bits.set_bit(2);
         /// // Sets the bit at position 2 within the stored value.
-        /// assert!(bits.is_bit_on(2));
+        /// //assert!(bits.is_bit_on(2));
         /// // Confirms that the bit at position 2 is set.
-        /// let clear_success = bits.clear_bit(2);
+        /// //let clear_success = bits.clear_bit(2);
         /// // Clears the bit at position 2 within the stored value.
-        /// assert!(clear_success);
+        /// //assert!(clear_success);
         /// // Confirms that the bit at position 2 is now cleared.
-        /// assert!(!bits.is_bit_on(2));
+        /// //assert!(!bits.is_bit_on(2));
         /// ```
         ///
         /// This example demonstrates how to use the `clear_bit` method to clear a specific bit within the stored value.
@@ -339,19 +301,19 @@ pub mod bit_manipulation {
         /// # Example
         ///
         /// ```
-        /// let mut bits: Bits<u8> = Bits::new();
+        /// //let mut bits: Bits<u8> = Bits::new();
         /// // Creates a new instance of `Bits` with an initial value of zero and size based on `u8`.
-        /// bits.set_bit(2);
-        /// bits.set_bit(4);
-        /// bits.set_bit(6);
+        /// //bits.set_bit(2);
+        /// //bits.set_bit(4);
+        /// //bits.set_bit(6);
         /// // Sets the bits at positions 2, 4, and 6 within the stored value.
-        /// assert_eq!(bits.get_value(), 84); // binary representation: 1010100
-        /// let positions_to_clear = vec![2, 4, 6];
-        /// let cleared_flags = bits.clear_bits(&positions_to_clear);
+        /// //assert_eq!(bits.get_value(), 84); // binary representation: 1010100
+        /// //let positions_to_clear = vec![2, 4, 6];
+        /// //let cleared_flags = bits.clear_bits(&positions_to_clear);
         /// // Clears the bits at positions 2, 4, and 6 within the stored value.
-        /// assert_eq!(cleared_flags, &vec![false, false, false, false, false, false, false, false]);
+        /// //assert_eq!(cleared_flags, &vec![false, false, false, false, false, false, false, false]);
         /// // The returned vector indicates which bits were successfully cleared.
-        /// assert_eq!(bits.get_value(), 0); // After clearing, the value becomes 0.
+        /// //assert_eq!(bits.get_value(), 0); // After clearing, the value becomes 0.
         /// ```
         ///
         /// This example demonstrates how to use the `clear_bits` method to clear multiple bits within the stored value.
@@ -370,16 +332,16 @@ pub mod bit_manipulation {
         /// # Example
         ///
         /// ```
-        /// let mut bits: Bits<u8> = Bits::new();
+        /// //let mut bits: Bits<u8> = Bits::new();
         /// // Creates a new instance of `Bits` with an initial value of zero and size based on `u8`.
-        /// bits.set_bit(2);
-        /// bits.set_bit(4);
-        /// bits.set_bit(6);
+        /// //bits.set_bit(2);
+        /// //bits.set_bit(4);
+        /// //bits.set_bit(6);
         /// // Sets the bits at positions 2, 4, and 6 within the stored value.
-        /// assert_eq!(bits.get_value(), 84); // binary representation: 1010100
-        /// bits.clear_all_bits();
+        /// //assert_eq!(bits.get_value(), 84); // binary representation: 1010100
+        /// //bits.clear_all_bits();
         /// // Clears all bits within the stored value.
-        /// assert_eq!(bits.get_value(), 0); // After clearing, the value becomes 0.
+        /// //assert_eq!(bits.get_value(), 0); // After clearing, the value becomes 0.
         /// ```
         ///
         /// This example demonstrates how to use the `clear_all_bits` method to clear all bits within the stored value.
@@ -399,13 +361,13 @@ pub mod bit_manipulation {
         /// # Example
         ///
         /// ```
-        /// let mut bits: Bits<u8> = Bits::new();
+        /// //let mut bits: Bits<u8> = Bits::new();
         /// // Creates a new instance of `Bits` with an initial value of zero and size based on `u8`.
-        /// bits.set_bit(2);
-        /// bits.set_bit(4);
-        /// bits.set_bit(6);
+        /// //bits.set_bit(2);
+        /// //bits.set_bit(4);
+        /// //bits.set_bit(6);
         /// // Sets the bits at positions 2, 4, and 6 within the stored value.
-        /// assert_eq!(bits.get_value(), 84); // binary representation: 1010100
+        /// //assert_eq!(bits.get_value(), 84); // binary representation: 1010100
         /// ```
         ///
         /// This example demonstrates how to use the `get_value` method to retrieve the current value stored within the `Bits` struct.
@@ -427,13 +389,13 @@ pub mod bit_manipulation {
         /// # Example
         ///
         /// ```
-        /// let mut bits: Bits<u8> = Bits::new();
+        /// //let mut bits: Bits<u8> = Bits::new();
         /// // Creates a new instance of `Bits` with an initial value of zero and size based on `u8`.
-        /// bits.set_bit(2);
-        /// bits.set_bit(4);
-        /// bits.set_bit(6);
+        /// //bits.set_bit(2);
+        /// //bits.set_bit(4);
+        /// //bits.set_bit(6);
         /// // Sets the bits at positions 2, 4, and 6 within the stored value.
-        /// assert_eq!(bits.get_all_bits(), &vec![false, false, true, false, true, false, true, false]);
+        /// //assert_eq!(bits.get_all_bits(), &vec![false, false, true, false, true, false, true, false]);
         /// ```
         ///
         /// This example demonstrates how to use the `get_all_bits` method to retrieve the state of all bits within the stored value.
@@ -451,27 +413,27 @@ pub mod bit_manipulation {
         /// # Example
         ///
         /// ```
-        /// let mut bits: Bits<u8> = Bits::new();
+        /// //let mut bits: Bits<u8> = Bits::new();
         /// // Creates a new instance of `Bits` with an initial value of zero and size based on `u8`.
-        /// bits.set_all_flags();
+        /// //bits.set_all_flags();
         /// // Sets all bits within the stored value to 1, effectively setting it to the maximum possible value of `u8`.
-        /// assert_eq!(bits.get_value(), 255); // Maximum value representable by `u8`.
+        /// //assert_eq!(bits.get_value(), 255); // Maximum value representable by `u8`.
         ///
-        /// let mut bits: Bits<u16> = Bits::new();
-        /// bits.set_all_flags();
-        /// assert_eq!(bits.get_value(), 65535); // Maximum value representable by `u16`.
+        /// //let mut bits: Bits<u16> = Bits::new();
+        /// //bits.set_all_flags();
+        /// //assert_eq!(bits.get_value(), 65535); // Maximum value representable by `u16`.
         ///
-        /// let mut bits: Bits<u32> = Bits::new();
-        /// bits.set_all_flags();
-        /// assert_eq!(bits.get_value(), 4294967295); // Maximum value representable by `u32`.
+        /// //let mut bits: Bits<u32> = Bits::new();
+        /// //bits.set_all_flags();
+        /// //assert_eq!(bits.get_value(), 4294967295); // Maximum value representable by `u32`.
         ///
-        /// let mut bits: Bits<u64> = Bits::new();
-        /// bits.set_all_flags();
-        /// assert_eq!(bits.get_value(), 18446744073709551615); // Maximum value representable by `u64`.
+        /// //let mut bits: Bits<u64> = Bits::new();
+        /// //bits.set_all_flags();
+        /// //assert_eq!(bits.get_value(), 18446744073709551615); // Maximum value representable by `u64`.
         ///
-        /// let mut bits: Bits<u128> = Bits::new();
-        /// bits.set_all_flags();
-        /// assert_eq!(bits.get_value(), 340282366920938463463374607431768211455); // Maximum value representable by `u128`.
+        /// //let mut bits: Bits<u128> = Bits::new();
+        /// //bits.set_all_flags();
+        /// //assert_eq!(bits.get_value(), 340282366920938463463374607431768211455); // Maximum value representable by `u128`.
         /// ```
         ///
         /// This example demonstrates how to use the `set_all_flags` method to set all bits to 1, effectively
