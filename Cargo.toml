@@ -1,7 +1,7 @@
 [package]
 authors = ["Dieriba <dieriba.pro@gmail.com>"]
 name = "bit_manipulation"
-version = "0.2.25"
+version = "0.2.3"
 edition = "2021"
 description = "bit_manipulation: A lightweight Rust crate for seamless management and validation of up to 128 option states. Empower your applications with efficient, flexible, and intuitive option handling, ensuring smooth activation checks and manipulation."
 license = "MIT"
