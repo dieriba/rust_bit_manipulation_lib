@@ -1,6 +1,5 @@
 mod private {
     pub use std::ops::*;
-    pub const BYTES: usize = 8;
 
     pub trait Uint:
         std::fmt::Display
@@ -24,7 +23,7 @@ impl private::Uint for u8 {
         std::u8::MAX
     }
     fn in_memory_size() -> u8 {
-        (std::mem::size_of::<u8>() * private::BYTES) as u8
+        u8::BITS as u8
     }
     fn convert(bit: u8) -> Self {
         1 << bit
@@ -36,7 +35,7 @@ impl private::Uint for u16 {
         std::u16::MAX
     }
     fn in_memory_size() -> u8 {
-        (std::mem::size_of::<u16>() * private::BYTES) as u8
+        u16::BITS as u8
     }
     fn convert(bit: u8) -> Self {
         1 << bit
@@ -48,7 +47,7 @@ impl private::Uint for u32 {
         std::u32::MAX
     }
     fn in_memory_size() -> u8 {
-        (std::mem::size_of::<u32>() * private::BYTES) as u8
+        u32::BITS as u8
     }
     fn convert(bit: u8) -> Self {
         1 << bit
@@ -60,7 +59,7 @@ impl private::Uint for u64 {
         std::u64::MAX
     }
     fn in_memory_size() -> u8 {
-        (std::mem::size_of::<u64>() * private::BYTES) as u8
+        u64::BITS as u8
     }
     fn convert(bit: u8) -> Self {
         1 << bit
@@ -72,7 +71,7 @@ impl private::Uint for u128 {
         std::u128::MAX
     }
     fn in_memory_size() -> u8 {
-        (std::mem::size_of::<u128>() * private::BYTES) as u8
+        u128::BITS as u8
     }
     fn convert(bit: u8) -> Self {
         1 << bit
