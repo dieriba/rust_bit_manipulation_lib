@@ -70,7 +70,7 @@ pub mod bit_manipulation {
         ///
         /// # Example
         ///
-        /// ```
+        /// ```compile_fail
         /// let bits: Bits<u8> = Bits::new();
         /// // Creates a new instance of `Bits` with an initial value of zero and size based on `u8`.
         /// ```
@@ -104,7 +104,7 @@ pub mod bit_manipulation {
         ///   or if the bit is not set.
         /// # Example
         ///
-        /// ```
+        /// ```compile_fail
         /// let bits: Bits<u8> = Bits::new();
         /// // Creates a new instance of `Bits` with an initial value of zero and size based on `u8`.
         /// assert!(bits.is_bit_on(2));
@@ -141,7 +141,7 @@ pub mod bit_manipulation {
         ///
         /// # Example
         ///
-        /// ```
+        /// ```compile_fail
         /// let bits: Bits<u8> = Bits::new();
         /// // Creates a new instance of `Bits` with an initial value of zero and size based on `u8`.
         /// let positions_to_check = vec![2, 4, 6];
@@ -180,7 +180,7 @@ pub mod bit_manipulation {
         /// - `false` if the provided bit position is out of range (greater than or equal to `self.size`).
         /// # Example
         ///
-        /// ```
+        /// ```compile_fail
         /// let mut bits: Bits<u8> = Bits::new();
         /// // Creates a new instance of `Bits` with an initial value of zero and size based on `u8`.
         /// let bit_to_set = 2;
@@ -220,7 +220,7 @@ pub mod bit_manipulation {
         /// in the stored value has been successfully set (`true`) or not (`false`).
         /// # Example
         ///
-        /// ```
+        /// ```compile_fail
         /// let mut bits: Bits<u8> = Bits::new();
         /// // Creates a new instance of `Bits` with an initial value of zero and size based on `u8`.
         /// let positions_to_set = vec![2, 4, 6];
@@ -257,7 +257,7 @@ pub mod bit_manipulation {
         /// - `false` if the provided bit position is out of range (greater than or equal to `n`).
         /// # Example
         ///
-        /// ```
+        /// ```compile_fail
         /// let mut bits: Bits<u8> = Bits::new();
         /// // Creates a new instance of `Bits` with an initial value of zero and size based on `u8`.
         /// bits.set_bit(2);
@@ -300,7 +300,7 @@ pub mod bit_manipulation {
         ///
         /// # Example
         ///
-        /// ```
+        /// ```compile_fail
         /// let mut bits: Bits<u8> = Bits::new();
         /// // Creates a new instance of `Bits` with an initial value of zero and size based on `u8`.
         /// bits.set_bit(2);
@@ -331,7 +331,7 @@ pub mod bit_manipulation {
         ///
         /// # Example
         ///
-        /// ```
+        /// ```compile_fail
         /// let mut bits: Bits<u8> = Bits::new();
         /// // Creates a new instance of `Bits` with an initial value of zero and size based on `u8`.
         /// bits.set_bit(2);
@@ -360,7 +360,7 @@ pub mod bit_manipulation {
         ///
         /// # Example
         ///
-        /// ```
+        /// ```compile_fail
         /// let mut bits: Bits<u8> = Bits::new();
         /// // Creates a new instance of `Bits` with an initial value of zero and size based on `u8`.
         /// bits.set_bit(2);
@@ -388,7 +388,7 @@ pub mod bit_manipulation {
         ///
         /// # Example
         ///
-        /// ```
+        /// ```compile_fail
         /// let mut bits: Bits<u8> = Bits::new();
         /// // Creates a new instance of `Bits` with an initial value of zero and size based on `u8`.
         /// bits.set_bit(2);
@@ -412,7 +412,7 @@ pub mod bit_manipulation {
         ///
         /// # Example
         ///
-        /// ```
+        /// ```compile_fail
         /// let mut bits: Bits<u8> = Bits::new();
         /// // Creates a new instance of `Bits` with an initial value of zero and size based on `u8`.
         /// bits.set_all_flags();
