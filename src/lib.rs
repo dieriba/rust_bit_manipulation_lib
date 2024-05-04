@@ -40,11 +40,6 @@ _impl_private!(u32);
 _impl_private!(u64);
 _impl_private!(u128);
 
-
-
-
-
-
 pub mod bit_manipulation {
     use crate::private;
 
@@ -113,7 +108,7 @@ pub mod bit_manipulation {
         /// let bits: Bits<u8> = Bits::new();
         /// // Creates a new instance of `Bits` with an initial value of zero and size based on `u8`.
         /// assert!(bits.is_bit_on(2));
-        /// //Checking that the third bit is activated
+        /// // Checking that the third bit is activated
         /// ```
         ///
         /// This example demonstrates how to use the `new` method to create a new instance of the `Bits`
