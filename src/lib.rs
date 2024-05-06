@@ -19,8 +19,9 @@ mod private {
 }
 
 macro_rules! _impl_private {
-    ($t:ty) => {
-        impl $crate::private::Uint for $t {
+    ($($t:ty),+) => {
+        $(
+            impl $crate::private::Uint for $t {
             fn max_value() -> Self {
                 <$t>::MAX
             }
@@ -31,14 +32,11 @@ macro_rules! _impl_private {
                 1 << bit
             }
         }
+    )+
     };
 }
 
-_impl_private!(u8);
-_impl_private!(u16);
-_impl_private!(u32);
-_impl_private!(u64);
-_impl_private!(u128);
+_impl_private![u8, u16, u32, u64, u128];
 
 pub mod bit_manipulation {
     use crate::private;
